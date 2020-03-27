@@ -7,9 +7,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   stats: "errors-only",
-  entry: {
-    global: path.resolve(__dirname, "../drupack/resources/index.js"),
-  },
+  entry: entryPoints,
   output: {
     path: path.resolve(__dirname, "../drupack/public/resources"),
     publicPath: "/themes/custom/drupack/public/resources",
@@ -52,6 +50,13 @@ module.exports = {
             },
           },
           "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: [require("postcss-preset-env")()],
+            },
+          },
+
           "sass-loader",
         ],
       },
