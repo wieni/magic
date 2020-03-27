@@ -1,4 +1,5 @@
 const config = require("./webpack.config");
+const drupackConfig = require("../drupack/drupack.dev.config.js");
 const path = require("path");
 
 module.exports = {
@@ -10,16 +11,16 @@ module.exports = {
     overlay: {
       errors: true,
     },
-    port: 3000,
+    port: drupackConfig.proxyPort,
     contentBase: path.resolve(__dirname, "resources"),
     headers: { "Access-Control-Allow-Origin": "*" },
     proxy: {
       "*": {
         secure: false,
-        target: "https://test.sander.wieni.dev",
+        target: drupackConfig.proxyTarget,
         changeOrigin: true,
         onProxyReq(proxyReq) {
-          proxyReq.setHeader("host", "test.sander.wieni.dev");
+          proxyReq.setHeader("host", drupackConfig.proxyHost);
         },
       },
     },
