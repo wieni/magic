@@ -1,13 +1,13 @@
 const path = require("path");
+const { entryPoints } = require("./webpack.helpers");
+
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   stats: "errors-only",
-  entry: {
-    global: path.resolve(__dirname, "../drupack/resources/index.js"),
-  },
+  entry: entryPoints,
   output: {
     path: path.resolve(__dirname, "../drupack/public/resources"),
     publicPath: "/themes/custom/drupack/public/resources",
@@ -22,6 +22,13 @@ module.exports = {
   ],
   module: {
     rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
+      },
       {
         test: /\.s?css/,
         use: [
