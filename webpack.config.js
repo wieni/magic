@@ -6,7 +6,6 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const StylelintPlugin = require("stylelint-webpack-plugin");
 const webpack = require("webpack");
-const ReactRefreshPlugin = require("@webhotelier/webpack-fast-refresh");
 
 module.exports = (theme) => ({
   mode: process.env.NODE_ENV,
