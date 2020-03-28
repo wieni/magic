@@ -1,5 +1,5 @@
 const path = require("path");
-const config = require("../drupack/drupack.config.js");
+const config = require("../drupack/magic.config.js");
 
 const entryPoints = Object.keys(config.entry).reduce(
   (prevValue, currentValue) => {
@@ -13,6 +13,8 @@ const entryPoints = Object.keys(config.entry).reduce(
   },
   {}
 );
+
+const generateConfig = (theme) => ({});
 
 module.exports = {
   entryPoints: entryPoints,

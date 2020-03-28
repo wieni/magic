@@ -1,5 +1,5 @@
 const config = require("./webpack.config");
-const drupackConfig = require("../drupack/drupack.dev.config");
+const drupackConfig = require("../drupack/magic.dev.config");
 const path = require("path");
 
 module.exports = {
