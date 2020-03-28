@@ -57,7 +57,7 @@ module.exports = (theme) => ({
               require.resolve("@babel/preset-env"),
               [require.resolve("@babel/preset-react")],
             ],
-            plugins: [],
+            plugins: [require.resolve("react-hot-loader/babel")],
           },
         },
       },
