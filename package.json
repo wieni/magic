@@ -1,14 +1,13 @@
 {
-  "name": "base",
+  "name": "magic",
   "version": "1.0.0",
-  "description": "",
+  "description": "Magic allows you to magically compile frontend assets!",
   "main": "index.js",
-  "author": "",
+  "author": "s_nder",
   "license": "ISC",
   "scripts": {
-    "dev": "webpack-dev-server --mode=development --config webpack.dev.config.js",
-    "start": "webpack-dev-server --mode=development --config webpack.dev.config.js --open",
-    "build": "NODE_ENV=production webpack --mode=production"
+    "start": "BROWSERSLIST_ENV=modern NODE_ENV=production webpack-dev-server --mode=development --config webpack.dev.config.js --open",
+    "build": "BROWSERSLIST_ENV=production NODE_ENV=production webpack --mode=production"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -31,5 +30,15 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "browserslist": {
+    "production": [
+      "defaults",
+      "IE 11"
+    ],
+    "modern": [
+      "last 1 chrome version",
+      "last 1 firefox version"
+    ]
+  }
 }

@@ -73,6 +73,17 @@ module.exports = {
         },
       }),
     ],
+    /* Code split vendors means that we split up the bundle into two: one bundle contains the code you write, and the other contains all your dependencies. The reasoning behind this is that the code in the dependencies don't change as often as the code you write. That makes it possible to cache the dependencies longer than if everything were in one bundle. */
+    runtimeChunk: "single",
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
+        },
+      },
+    },
   },
   resolve: {
     modules: [
