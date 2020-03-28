@@ -119,6 +119,7 @@ module.exports = (theme) => ({
       "node_modules",
     ],
     alias: {
+      "@magic": path.resolve(__dirname, "index.js"),
       "@bunny/components": path.resolve(
         __dirname,
         "../bunny/resources/components"

@@ -1,12 +1,11 @@
 const path = require("path");
-const errorOverlayMiddleware = require("react-dev-utils/errorOverlayMiddleware");
 
 module.exports = (theme, magicConfig) => ({
   quiet: true,
   host: "localhost",
   hot: true,
   inline: true,
-  overlay: false,
+  overlay: true,
   port: magicConfig.proxyPort,
   publicPath: `/themes/custom/${theme}/public/resources`,
   contentBase: path.resolve(__dirname, `../${theme}/resources`),
@@ -21,8 +20,5 @@ module.exports = (theme, magicConfig) => ({
         proxyReq.setHeader("host", magicConfig.proxyHost);
       },
     },
-  },
-  before(app, server) {
-    app.use(errorOverlayMiddleware());
   },
 });
