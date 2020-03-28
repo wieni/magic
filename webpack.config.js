@@ -6,12 +6,12 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const StylelintPlugin = require("stylelint-webpack-plugin");
 
-module.exports = {
+module.exports = (theme) => ({
   stats: "errors-only",
-  entry: entryPoints,
+  entry: entryPoints(theme),
   output: {
-    path: path.resolve(__dirname, "../drupack/public/resources"),
-    publicPath: "/themes/custom/drupack/public/resources",
+    path: path.resolve(__dirname, `../${theme}/public/resources`),
+    publicPath: `/themes/custom/${theme}/public/resources`,
     filename: "[name].js",
     chunkFilename: "[name].js",
   },
@@ -22,7 +22,7 @@ module.exports = {
     }),
     process.env.NODE_ENV !== "production"
       ? new StylelintPlugin({
-          context: path.resolve(__dirname, "../drupack/resources"),
+          context: path.resolve(__dirname, `../${theme}/resources`),
           configFile: path.resolve(__dirname, ".stylelintrc"),
           formatter: require("stylelint-formatter-pretty"),
         })
@@ -30,12 +30,12 @@ module.exports = {
   ].filter(Boolean),
   module: {
     rules: [
-      process.env.NODE_ENV !== "production"
+      process.env.NODE_ENV !== "production" && false
         ? {
             enforce: "pre",
             test: /\.(js|jsx)$/,
             exclude: /node_modules/,
-            loader: "eslint-loader",
+            loader: require.resolve("eslint-loader"),
             options: {
               configFile: path.resolve(__dirname, ".eslintrc"),
               formatter: require("eslint-formatter-pretty"),
@@ -46,16 +46,19 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: require.resolve("babel-loader"),
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: [
+              require.resolve("@babel/preset-env"),
+              require.resolve("@babel/preset-react"),
+            ],
             plugins: [],
           },
         },
       },
       {
         test: /\.(png|jp(e*)g|svg|gif|woff(2)?|ttf|eot|otf)$/,
-        loader: "file-loader",
+        loader: require.resolve("file-loader"),
         options: {
           name: "[path][name].[ext]",
         },
@@ -69,15 +72,15 @@ module.exports = {
               hmr: process.env.NODE_ENV !== "production",
             },
           },
-          "css-loader",
+          require.resolve("css-loader"),
           {
-            loader: "postcss-loader",
+            loader: require.resolve("postcss-loader"),
             options: {
               plugins: [require("postcss-preset-env")()],
             },
           },
 
-          "sass-loader",
+          require.resolve("sass-loader"),
         ],
       },
     ].filter(Boolean),
@@ -106,8 +109,8 @@ module.exports = {
   },
   resolve: {
     modules: [
-      path.resolve(__dirname, "../drupack/resources"),
-      path.resolve(__dirname, "../drupack/node_modules"),
+      path.resolve(__dirname, `../${theme}/resources`),
+      path.resolve(__dirname, `../${theme}/node_modules`),
       "node_modules",
     ],
     alias: {
@@ -118,4 +121,4 @@ module.exports = {
     },
     extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
   },
-};
+});
