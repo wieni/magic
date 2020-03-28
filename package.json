@@ -6,6 +6,7 @@
   "author": "s_nder",
   "license": "ISC",
   "scripts": {
+    "demo": "magic start",
     "start": "BROWSERSLIST_ENV=development NODE_ENV=development webpack-dev-server --mode=development --config webpack.dev.config.js --open",
     "build": "BROWSERSLIST_ENV=production NODE_ENV=production webpack --mode=production"
   },
