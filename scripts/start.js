@@ -35,10 +35,8 @@ const magicStart = () => {
     magicDevConfig
   );
 
-  const compiler = webpack({
-    ...webpackConfig,
-    mode: "development",
-  });
+  const compiler = webpack(webpackConfig);
+  WebpackDevServer.addDevServerEntrypoints(webpackConfig, webpackDevConfig);
   const devServer = new WebpackDevServer(compiler, webpackDevConfig);
 
   devServer.listen(magicDevConfig.proxyPort, "localhost", (err) => {
@@ -53,7 +51,7 @@ const magicStart = () => {
     openBrowser(localServerUrl);
     console.log(
       boxen(
-        `🎩 Loading Magic Development Server:\n${chalk.red(localServerUrl)}`,
+        `Loading Magic Development Server:\n${chalk.bold.blue(localServerUrl)}`,
         {
           padding: 1,
         }

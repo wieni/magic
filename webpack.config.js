@@ -5,8 +5,11 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const StylelintPlugin = require("stylelint-webpack-plugin");
+const webpack = require("webpack");
+const ReactRefreshPlugin = require("@webhotelier/webpack-fast-refresh");
 
 module.exports = (theme) => ({
+  mode: process.env.NODE_ENV,
   stats: "errors-only",
   entry: entryPoints(theme),
   output: {
@@ -16,6 +19,9 @@ module.exports = (theme) => ({
     chunkFilename: "[name].js",
   },
   plugins: [
+    process.env.NODE_ENV !== "production"
+      ? new webpack.HotModuleReplacementPlugin({})
+      : false,
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[name].css",
@@ -30,7 +36,7 @@ module.exports = (theme) => ({
   ].filter(Boolean),
   module: {
     rules: [
-      process.env.NODE_ENV !== "production" && false
+      process.env.NODE_ENV !== "production"
         ? {
             enforce: "pre",
             test: /\.(js|jsx)$/,
@@ -50,7 +56,7 @@ module.exports = (theme) => ({
           options: {
             presets: [
               require.resolve("@babel/preset-env"),
-              require.resolve("@babel/preset-react"),
+              [require.resolve("@babel/preset-react")],
             ],
             plugins: [],
           },
@@ -69,7 +75,7 @@ module.exports = (theme) => ({
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: process.env.NODE_ENV !== "production",
+              hmr: true,
             },
           },
           require.resolve("css-loader"),
@@ -121,4 +127,6 @@ module.exports = (theme) => ({
     },
     extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
   },
+  devtool:
+    process.env.NODE_ENV === "production" ? "" : "cheap-module-source-map",
 });

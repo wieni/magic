@@ -5,10 +5,12 @@ const entryPoints = (theme) =>
   Object.keys(config.entry).reduce((prevValue, currentValue) => {
     return {
       ...prevValue,
-      [currentValue]: path.resolve(
-        __dirname,
-        `../${theme}/resources/` + config.entry[currentValue]
-      ),
+      [currentValue]: [
+        path.resolve(
+          __dirname,
+          `../${theme}/resources/` + config.entry[currentValue]
+        ),
+      ],
     };
   }, {});
 
