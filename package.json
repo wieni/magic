@@ -4,7 +4,7 @@
   "description": "Magic allows you to magically compile frontend assets!",
   "main": "index.js",
   "author": "s_nder",
-  "license": "ISC",
+  "license": "MIT",
   "bin": {
     "magic": "./bin/magic.js"
   },
