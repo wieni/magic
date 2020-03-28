@@ -4,6 +4,7 @@ const { entryPoints } = require("./webpack.helpers");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const StylelintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
   stats: "errors-only",
@@ -19,9 +20,24 @@ module.exports = {
       filename: "[name].css",
       chunkFilename: "[name].bundle.css",
     }),
-  ],
+    process.env.NODE_ENV !== "production" ? new StylelintPlugin({
+      context: path.resolve(__dirname, '../drupack/resources'),
+      configFile: path.resolve(__dirname, '.stylelintrc'),
+      formatter: require('stylelint-formatter-pretty'),
+    }) : false,
+  ].filter(Boolean),
   module: {
     rules: [
+      process.env.NODE_ENV !== "production" ? {
+        enforce: "pre",
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: "eslint-loader",
+        options: {
+          configFile: path.resolve(__dirname, '.eslintrc'),
+          formatter: require('eslint-formatter-pretty'),
+        }
+      } : false,
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -60,7 +76,7 @@ module.exports = {
           "sass-loader",
         ],
       },
-    ],
+    ].filter(Boolean),
   },
   optimization: {
     minimize: process.env.NODE_ENV === "production",
