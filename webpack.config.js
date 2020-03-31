@@ -19,7 +19,7 @@ module.exports = (theme) => ({
   },
   plugins: [
     process.env.NODE_ENV !== "production"
-      ? new webpack.HotModuleReplacementPlugin({})
+      ? new webpack.HotModuleReplacementPlugin()
       : false,
     new MiniCssExtractPlugin({
       filename: "[name].css",
@@ -40,11 +40,18 @@ module.exports = (theme) => ({
             enforce: "pre",
             test: /\.(js|jsx)$/,
             exclude: /node_modules/,
-            loader: require.resolve("eslint-loader"),
-            options: {
-              configFile: path.resolve(__dirname, ".eslintrc"),
-              formatter: require("eslint-formatter-pretty"),
-            },
+            use: [
+              {
+                options: {
+                  cache: false,
+
+                  eslintPath: require.resolve("eslint"),
+                  configFile: path.resolve(__dirname, ".eslintrc"),
+                  formatter: require("eslint-formatter-pretty"),
+                },
+                loader: require.resolve("eslint-loader"),
+              },
+            ],
           }
         : false,
       {

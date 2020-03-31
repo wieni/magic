@@ -1,8 +1,8 @@
 const path = require("path");
 
 module.exports = (theme, magicConfig) => ({
-  quiet: true,
-  host: "localhost",
+  quiet: false,
+  host: "0.0.0.0",
   hot: true,
   inline: true,
   overlay: true,
