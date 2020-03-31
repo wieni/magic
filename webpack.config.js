@@ -46,8 +46,9 @@ module.exports = (theme) => ({
                   cache: false,
 
                   eslintPath: require.resolve("eslint"),
-                  configFile: path.resolve(__dirname, ".eslintrc"),
+                  configFile: path.resolve(__dirname, ".eslintrc.js"),
                   formatter: require("eslint-formatter-pretty"),
+                  resolvePluginsRelativeTo: __dirname,
                 },
                 loader: require.resolve("eslint-loader"),
               },
@@ -64,7 +65,11 @@ module.exports = (theme) => ({
               require.resolve("@babel/preset-env"),
               [require.resolve("@babel/preset-react")],
             ],
-            plugins: [require.resolve("react-hot-loader/babel")],
+            plugins: [
+              process.env.NODE_ENV !== "production"
+                ? require.resolve("react-hot-loader/babel")
+                : false,
+            ].filter(Boolean),
           },
         },
       },
