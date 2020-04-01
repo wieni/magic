@@ -4,6 +4,7 @@ const boxen = require("boxen");
 const chalk = require("chalk");
 
 const webpack = require("webpack");
+const formatMessages = require("webpack-format-messages");
 const WebpackDevServer = require("webpack-dev-server");
 const clearConsole = require("react-dev-utils/clearConsole");
 const openBrowser = require("react-dev-utils/openBrowser");
@@ -46,6 +47,30 @@ const magicStart = () => {
     if (isInteractive) {
       clearConsole();
     }
+
+    compiler.hooks.invalid.tap("invalid", function () {
+      console.log("Compiling...");
+    });
+
+    compiler.hooks.done.tap("done", (stats) => {
+      clearConsole();
+      const messages = formatMessages(stats);
+
+      if (!messages.errors.length && !messages.warnings.length) {
+        console.log("Compiled successfully!");
+      }
+
+      if (messages.errors.length) {
+        console.log("Failed to compile.");
+        messages.errors.forEach((e) => console.log(e));
+        return;
+      }
+
+      if (messages.warnings.length) {
+        console.log("Compiled with warnings.");
+        messages.warnings.forEach((w) => console.log(w));
+      }
+    });
 
     const localServerUrl = `http://localhost:${magicDevConfig.proxyPort}`;
     openBrowser(localServerUrl);

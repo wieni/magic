@@ -44,14 +44,17 @@
     "sass": "^1.26.3",
     "sass-loader": "^8.0.2",
     "stylelint": "^13.2.1",
+    "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-recommended-scss": "^4.2.0",
+    "stylelint-config-twbs-bootstrap": "^2.0.1",
     "stylelint-formatter-pretty": "^2.0.0",
     "stylelint-prettier": "^1.1.2",
     "stylelint-scss": "^3.16.0",
     "stylelint-webpack-plugin": "^1.2.3",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.10.3",
+    "webpack-format-messages": "^2.0.6"
   },
   "browserslist": {
     "production": [
