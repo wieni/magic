@@ -17,10 +17,12 @@ const magicBuild = () => {
   welcomeMessage(theme);
 
   const magicConfigFilePath = path.resolve(appDirectory, "magic.config.js");
-  resolveConfigFile(magicConfigFilePath);
+  const magicConfig = resolveConfigFile(magicConfigFilePath);
 
-  const webpackConfig = require("../webpack.config")(theme);
+  const webpackConfig = require("../webpack.config")(theme, magicConfig);
   const compiler = webpack(webpackConfig);
+
+  console.log(compiler.options);
 
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
