@@ -30,7 +30,7 @@ const magicStart = () => {
   );
   const magicDevConfig = resolveConfigFile(magicDevConfigFilePath);
 
-  const webpackConfig = require("../webpack.config")(theme);
+  const webpackConfig = require("../webpack.config")(theme, magicConfig);
   const webpackDevConfig = require("../webpack.dev.config")(
     theme,
     magicDevConfig
