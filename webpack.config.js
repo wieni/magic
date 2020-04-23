@@ -1,5 +1,4 @@
 const path = require("path");
-const { entryPoints } = require("./webpack.helpers");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
@@ -7,10 +6,24 @@ const TerserPlugin = require("terser-webpack-plugin");
 const StylelintPlugin = require("stylelint-webpack-plugin");
 const webpack = require("webpack");
 
-module.exports = (theme) => ({
+const fs = require('fs');
+const appDirectory = fs.realpathSync(process.cwd());
+
+module.exports = (theme, magicConfig) => ({
   mode: process.env.NODE_ENV,
   stats: "errors-only",
-  entry: entryPoints(theme),
+  entry: Object.keys(magicConfig.entry).reduce((prevValue, currentValue) => {
+    return {
+      ...prevValue,
+      [currentValue]: [
+        path.resolve(
+          appDirectory,
+          'resources',
+          magicConfig.entry[currentValue]
+        ),
+      ],
+    };
+  }, {}),
   output: {
     path: path.resolve(__dirname, `../${theme}/public/resources`),
     publicPath: `/themes/custom/${theme}/public/resources`,
@@ -126,8 +139,14 @@ module.exports = (theme) => ({
   },
   resolve: {
     modules: [
-      path.resolve(__dirname, `../${theme}/resources`),
-      path.resolve(__dirname, `../${theme}/node_modules`),
+      path.resolve(
+          appDirectory,
+          'resources',
+      ),
+      path.resolve(
+          appDirectory,
+          'node_modules',
+      ),
       "node_modules",
     ],
     alias: {
