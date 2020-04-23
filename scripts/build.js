@@ -22,8 +22,6 @@ const magicBuild = () => {
   const webpackConfig = require("../webpack.config")(theme, magicConfig);
   const compiler = webpack(webpackConfig);
 
-  console.log(compiler.options);
-
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
       if (err) {
