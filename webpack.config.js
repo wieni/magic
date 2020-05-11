@@ -98,7 +98,7 @@ module.exports = (theme, magicConfig) => ({
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: true,
+              hmr: process.env.NODE_ENV === "development",
             },
           },
           require.resolve("css-loader"),
