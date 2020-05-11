@@ -11,7 +11,7 @@ module.exports = (theme, magicConfig) => ({
   port: magicConfig.proxyPort,
   publicPath: `/themes/custom/${theme}/public/resources`,
   contentBase: path.resolve(appDirectory, "resources"),
-  watchContentBase: true,
+  watchContentBase: false,
   headers: { "Access-Control-Allow-Origin": "*" },
   proxy: {
     "*": {
