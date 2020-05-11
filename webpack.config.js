@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 const path = require("path");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -5,9 +6,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const StylelintPlugin = require("stylelint-webpack-plugin");
 const webpack = require("webpack");
-
-const fs = require('fs');
-const appDirectory = fs.realpathSync(process.cwd());
+const { appDirectory } = require("./paths");
 
 module.exports = (theme, magicConfig) => ({
   mode: process.env.NODE_ENV,
@@ -18,14 +17,14 @@ module.exports = (theme, magicConfig) => ({
       [currentValue]: [
         path.resolve(
           appDirectory,
-          'resources',
+          "resources",
           magicConfig.entry[currentValue]
         ),
       ],
     };
   }, {}),
   output: {
-    path: path.resolve(__dirname, `../${theme}/public/resources`),
+    path: path.resolve(appDirectory, `public/resources`),
     publicPath: `/themes/custom/${theme}/public/resources`,
     filename: "[name].js",
     chunkFilename: "[name].js",
@@ -40,7 +39,7 @@ module.exports = (theme, magicConfig) => ({
     }),
     process.env.NODE_ENV !== "production"
       ? new StylelintPlugin({
-          context: path.resolve(__dirname, `../${theme}/resources`),
+          context: path.resolve(appDirectory, "resources"),
           configFile: path.resolve(__dirname, ".stylelintrc"),
           formatter: require("stylelint-formatter-pretty"),
         })
@@ -139,22 +138,12 @@ module.exports = (theme, magicConfig) => ({
   },
   resolve: {
     modules: [
-      path.resolve(
-          appDirectory,
-          'resources',
-      ),
-      path.resolve(
-          appDirectory,
-          'node_modules',
-      ),
+      path.resolve(appDirectory, "resources"),
+      path.resolve(appDirectory, "node_modules"),
       "node_modules",
     ],
     alias: {
       "@magic": path.resolve(__dirname, "index.js"),
-      "@bunny/components": path.resolve(
-        __dirname,
-        "../bunny/resources/components"
-      ),
     },
     extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
   },

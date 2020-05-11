@@ -1,5 +1,7 @@
 const path = require("path");
 
+const { appDirectory } = require("./paths");
+
 module.exports = (theme, magicConfig) => ({
   quiet: true,
   host: "0.0.0.0",
@@ -8,8 +10,8 @@ module.exports = (theme, magicConfig) => ({
   overlay: true,
   port: magicConfig.proxyPort,
   publicPath: `/themes/custom/${theme}/public/resources`,
-  contentBase: path.resolve(__dirname, `../${theme}/resources`),
-  watchContentBase: false,
+  contentBase: path.resolve(appDirectory, "resources"),
+  watchContentBase: true,
   headers: { "Access-Control-Allow-Origin": "*" },
   proxy: {
     "*": {
