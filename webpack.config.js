@@ -4,7 +4,9 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+/*
 const StylelintPlugin = require("stylelint-webpack-plugin");
+*/
 const webpack = require("webpack");
 const { appDirectory } = require("./paths");
 
@@ -37,6 +39,7 @@ module.exports = (theme, magicConfig) => ({
       filename: "[name].css",
       chunkFilename: "[name].css",
     }),
+    /*
     process.env.NODE_ENV !== "production"
       ? new StylelintPlugin({
           context: path.resolve(appDirectory, "resources"),
@@ -44,9 +47,11 @@ module.exports = (theme, magicConfig) => ({
           formatter: require("stylelint-formatter-pretty"),
         })
       : false,
+    */
   ].filter(Boolean),
   module: {
     rules: [
+      /*
       process.env.NODE_ENV !== "production"
         ? {
             enforce: "pre",
@@ -68,6 +73,7 @@ module.exports = (theme, magicConfig) => ({
             ],
           }
         : false,
+        */
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
