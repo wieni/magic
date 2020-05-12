@@ -153,7 +153,7 @@ module.exports = (theme, magicConfig) => ({
       "node_modules",
     ],
     alias: {
-      "@magic": path.resolve(__dirname, "index.js"),
+      "@bunny": path.resolve(appDirectory, "../../custom/bunny/resources"),
     },
     extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
   },
