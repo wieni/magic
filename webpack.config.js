@@ -56,11 +56,12 @@ module.exports = (theme, magicConfig) => ({
               {
                 options: {
                   cache: false,
-
-                  eslintPath: require.resolve("eslint"),
-                  configFile: path.resolve(__dirname, ".eslintrc.js"),
                   formatter: require("eslint-formatter-pretty"),
+                  eslintPath: require.resolve("eslint"),
                   resolvePluginsRelativeTo: __dirname,
+                  baseConfig: {
+                    extends: [require.resolve("eslint-config-drupack")],
+                  },
                 },
                 loader: require.resolve("eslint-loader"),
               },
@@ -126,15 +127,18 @@ module.exports = (theme, magicConfig) => ({
       }),
     ],
     runtimeChunk: "single",
-    splitChunks: process.env.NODE_ENV === "production" ? {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all",
-        },
-      },
-    } : false,
+    splitChunks:
+      process.env.NODE_ENV === "production"
+        ? {
+            cacheGroups: {
+              vendor: {
+                test: /[\\/]node_modules[\\/]/,
+                name: "vendors",
+                chunks: "all",
+              },
+            },
+          }
+        : false,
   },
   resolve: {
     modules: [
