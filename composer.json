@@ -3,10 +3,10 @@
   "description": "Frontend for Drupal can be magical.",
   "license": "MIT",
   "authors": [
-      {
-          "name": "Sander Tirez",
-          "email": "me@sqndr.com"
-      }
+    {
+      "name": "Sander Tirez",
+      "email": "me@sqndr.com"
+    }
   ],
   "minimum-stability": "dev",
   "prefer-stable": true,
