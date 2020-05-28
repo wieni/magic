@@ -27,7 +27,7 @@ module.exports = (theme, magicConfig) => ({
   }, {}),
   output: {
     path: path.resolve(appDirectory, `public/resources`),
-    publicPath: `/themes/custom/${theme}/public/resources`,
+    publicPath: `/themes/custom/${theme}/public/resources/`,
     filename: "[name].js",
     chunkFilename: "[name].js",
   },
