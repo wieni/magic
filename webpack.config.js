@@ -88,6 +88,7 @@ module.exports = (theme, magicConfig) => ({
               process.env.NODE_ENV !== "production"
                 ? require.resolve("react-hot-loader/babel")
                 : false,
+              "@babel/plugin-syntax-class-properties",
             ].filter(Boolean),
           },
         },
