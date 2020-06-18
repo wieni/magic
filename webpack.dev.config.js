@@ -15,7 +15,7 @@ module.exports = (theme, magicConfig) => ({
   headers: { "Access-Control-Allow-Origin": "*" },
   proxy: {
     "*": {
-      secure: false,
+      secure: true,
       target: magicConfig.proxyTarget,
       changeOrigin: true,
       onProxyReq(proxyReq) {
