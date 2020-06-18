@@ -4,6 +4,7 @@ const { appDirectory } = require("./paths");
 
 module.exports = (theme, magicConfig) => ({
   quiet: true,
+  https: true,
   host: "0.0.0.0",
   hot: true,
   inline: true,
@@ -15,7 +16,7 @@ module.exports = (theme, magicConfig) => ({
   headers: { "Access-Control-Allow-Origin": "*" },
   proxy: {
     "*": {
-      secure: true,
+      secure: false,
       target: magicConfig.proxyTarget,
       changeOrigin: true,
       onProxyReq(proxyReq) {
