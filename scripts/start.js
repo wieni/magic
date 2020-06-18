@@ -72,7 +72,7 @@ const magicStart = () => {
       }
     });
 
-    const localServerUrl = `http://localhost:${magicDevConfig.proxyPort}`;
+    const localServerUrl = `https://localhost:${magicDevConfig.proxyPort}`;
     openBrowser(localServerUrl);
     console.log(
       boxen(
