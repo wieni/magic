@@ -1,6 +1,6 @@
 # Magic
 
-A frontend build tool, basic on [create-react-app](https://github.com/facebook/create-react-app). It's a **black box** that compiles sass (`scss`) and javascript (`js` / `jsx`) files.
+A frontend build tool, based on [create-react-app](https://github.com/facebook/create-react-app). It's a **black box** that compiles sass (`scss`) and javascript (`js` / `jsx`) files.
 
 ## Installation
 
