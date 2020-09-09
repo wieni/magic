@@ -21,9 +21,9 @@ Configuration is done in the `magic.config.js` file.
 
 `entry`
 
-These are all the **bundles** that should be compiled. An object with key-valye pairs: the *key* is the output name of the bundle, the *value* is the filename.
+These are all the **bundles** that should be compiled. An object with key-valye pairs: the _key_ is the output name of the bundle, the _value_ is the filename.
 
-> **Note:** All bundles should be placed inside the `resources` folder. 
+> **Note:** All bundles should be placed inside the `resources` folder.
 
 ```
 module.exports = {
@@ -34,6 +34,23 @@ module.exports = {
 ```
 
 > In this example, `resources/index.js` in a bundle. The output is placed inside `public/resources/{files}`.
+
+`alias`
+
+This allows you to use (webpack) alias resolving.
+
+> **Note:** All alias should be placed inside the `resources` folder.
+
+```
+module.exports = {
+  ...,
+  alias: {
+    "@dashboard": "dashboard",
+  },
+};
+```
+
+> In this example, `@dashboard` will resolves files from `resources/dashboard`.
 
 ## Development config
 
@@ -49,5 +66,5 @@ module.exports = {
 
 ## Usage
 
-* `magic build`: Build the frontend.
-* `magic start`: Run a development (proxy) server.
+- `magic build`: Build the frontend.
+- `magic start`: Run a development (proxy) server.
