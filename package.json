@@ -1,5 +1,5 @@
 {
-  "name": "magic",
+  "name": "@wieni/magic",
   "version": "1.0.0",
   "description": "Magic allows you to magically compile frontend assets!",
   "main": "index.js",
