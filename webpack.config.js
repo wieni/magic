@@ -148,16 +148,18 @@ module.exports = (theme, magicConfig) => ({
         : false,
   },
   resolve: {
-    alias: Object.keys(magicConfig.alias).reduce((prevValue, currentValue) => {
-      return {
-        ...prevValue,
-        [currentValue]: path.resolve(
-          appDirectory,
-          "resources",
-          magicConfig.alias[currentValue]
-        ),
-      };
-    }, {}),
+    alias: magicConfig.alias
+      ? Object.keys(magicConfig.alias).reduce((prevValue, currentValue) => {
+          return {
+            ...prevValue,
+            [currentValue]: path.resolve(
+              appDirectory,
+              "resources",
+              magicConfig.alias[currentValue]
+            ),
+          };
+        }, {})
+      : {},
     modules: [
       path.resolve(appDirectory, "resources"),
       path.resolve(appDirectory, "node_modules"),
