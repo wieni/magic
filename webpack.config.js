@@ -39,41 +39,9 @@ module.exports = (theme, magicConfig) => ({
       filename: "[name].css",
       chunkFilename: "[name].css",
     }),
-    /*
-    process.env.NODE_ENV !== "production"
-      ? new StylelintPlugin({
-          context: path.resolve(appDirectory, "resources"),
-          configFile: path.resolve(__dirname, ".stylelintrc"),
-          formatter: require("stylelint-formatter-pretty"),
-        })
-      : false,
-    */
   ].filter(Boolean),
   module: {
     rules: [
-      /*
-      process.env.NODE_ENV !== "production"
-        ? {
-            enforce: "pre",
-            test: /\.(js|jsx)$/,
-            exclude: /node_modules/,
-            use: [
-              {
-                options: {
-                  cache: false,
-                  formatter: require("eslint-formatter-pretty"),
-                  eslintPath: require.resolve("eslint"),
-                  resolvePluginsRelativeTo: __dirname,
-                  baseConfig: {
-                    extends: [require.resolve("eslint-config-drupack")],
-                  },
-                },
-                loader: require.resolve("eslint-loader"),
-              },
-            ],
-          }
-        : false,
-        */
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
