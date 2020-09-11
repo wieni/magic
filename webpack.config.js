@@ -102,7 +102,18 @@ module.exports = (theme, magicConfig) => ({
       }),
     ],
     runtimeChunk: "single",
-    splitChunks: { chunks: "all", name: false },
+    splitChunks:
+      process.env.NODE_ENV === "production"
+        ? {
+            cacheGroups: {
+              vendor: {
+                test: /[\\/]node_modules[\\/]/,
+                name: "vendors",
+                chunks: "all",
+              },
+            },
+          }
+        : false,
   },
   resolve: {
     alias: magicConfig.alias
