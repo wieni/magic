@@ -30,6 +30,7 @@ module.exports = (theme, magicConfig) => ({
     publicPath: `/themes/custom/${theme}/public/resources/`,
     filename: "[name].js",
     chunkFilename: "[name].js",
+    jsonpFunction: "wieniJsonp",
   },
   plugins: [
     process.env.NODE_ENV !== "production"
@@ -102,18 +103,15 @@ module.exports = (theme, magicConfig) => ({
       }),
     ],
     runtimeChunk: "single",
-    splitChunks:
-      process.env.NODE_ENV === "production"
-        ? {
-            cacheGroups: {
-              vendor: {
-                test: /[\\/]node_modules[\\/]/,
-                name: "vendors",
-                chunks: "all",
-              },
-            },
-          }
-        : false,
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
+        },
+      },
+    },
   },
   resolve: {
     alias: magicConfig.alias
