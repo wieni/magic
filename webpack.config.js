@@ -4,9 +4,6 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-/*
-const StylelintPlugin = require("stylelint-webpack-plugin");
-*/
 const webpack = require("webpack");
 const { appDirectory } = require("./paths");
 
@@ -30,7 +27,7 @@ module.exports = (theme, magicConfig) => ({
     publicPath: `/themes/custom/${theme}/public/resources/`,
     filename: "[name].js",
     chunkFilename: "[name].js",
-    jsonpFunction: "wieniJsonp",
+    jsonpFunction: "MAGIC_BY_WIENI",
   },
   plugins: [
     process.env.NODE_ENV !== "production"
@@ -82,10 +79,11 @@ module.exports = (theme, magicConfig) => ({
           {
             loader: require.resolve("postcss-loader"),
             options: {
-              plugins: [require("postcss-preset-env")()],
+              postcssOptions: {
+                plugins: [require("postcss-preset-env")()],
+              },
             },
           },
-
           require.resolve("sass-loader"),
         ],
       },
