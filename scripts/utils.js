@@ -23,7 +23,7 @@ const resolveConfigFile = (path) => {
         "Magic requires a config file in order to work. No magic config file found in:"
       )
     );
-    error(red("--" + path));
+    error(red(path));
   }
 };
 
