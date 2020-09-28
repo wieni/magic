@@ -47,7 +47,13 @@ module.exports = (theme, magicConfig) => ({
           loader: require.resolve("babel-loader"),
           options: {
             presets: [
-              require.resolve("@babel/preset-env"),
+              [
+                require.resolve("@babel/preset-env"),
+                {
+                  useBuiltIns: "usage",
+                  corejs: "3",
+                },
+              ],
               [require.resolve("@babel/preset-react")],
             ],
             plugins: [
